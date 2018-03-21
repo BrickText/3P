@@ -35,10 +35,24 @@ public class Trip {
     private Date endDate;
 
     @OneToMany(mappedBy = "trip")
-    private List<BookedSpots> bookedSpots;
+    private List<BookedSpot> bookedSpots;
 
     @OneToMany(mappedBy = "trip")
     private List<Path> paths;
+
+    public Trip(User organizer, int allSpots, int freeSpots, String description, int price,
+                Date startDate, Date endDate, List<BookedSpot> bookedSpots, List<Path> paths) {
+        this.id = id;
+        this.organizer = organizer;
+        this.allSpots = allSpots;
+        this.freeSpots = freeSpots;
+        this.description = description;
+        this.price = price;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.bookedSpots = bookedSpots;
+        this.paths = paths;
+    }
 
     public int getId() {
         return id;
@@ -98,5 +112,9 @@ public class Trip {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public List<Path> getPaths() {
+        return paths;
     }
 }

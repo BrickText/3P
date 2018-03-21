@@ -19,7 +19,6 @@ public class User {
     @NotNull
     private String email;
 
-    @NotNull
     private String profilePicture;
 
     @ManyToOne
@@ -30,19 +29,34 @@ public class User {
     private List<Trip> trips;
 
     @OneToMany(mappedBy = "user")
-    private List<BookedSpots> bookedSpots;
+    private List<BookedSpot> bookedSpots;
 
     private String facebookAuthenticationToken;
+
+    private boolean active;
+
+    public User(@NotNull String username, @NotNull String password, @NotNull String email,
+                String profilePicture, Location currentLocation, List<Trip> trips,
+                List<BookedSpot> bookedSpots, String facebookAuthenticationToken) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.profilePicture = profilePicture;
+        this.currentLocation = currentLocation;
+        this.trips = trips;
+        this.bookedSpots = bookedSpots;
+        this.facebookAuthenticationToken = facebookAuthenticationToken;
+    }
 
     public int getId() {
         return id;
     }
 
-    public String getUseriname() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUseriname(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -84,5 +98,12 @@ public class User {
 
     public void setFacebookAuthenticationToken(String facebookAuthenticationToken) {
         this.facebookAuthenticationToken = facebookAuthenticationToken;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

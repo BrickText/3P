@@ -29,6 +29,16 @@ public class Location {
     @OneToMany(mappedBy = "currentLocation")
     private List<User> users;
 
+    public Location(@NotNull String name, @NotNull int longtitude, Path path,
+                    @NotNull int latitude, @NotNull String description, List<User> users) {
+        this.name = name;
+        this.longtitude = longtitude;
+        this.path = path;
+        this.latitude = latitude;
+        this.description = description;
+        this.users = users;
+    }
+
     public List<User> getUser() {
         return users;
     }
