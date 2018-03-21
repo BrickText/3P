@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,13 +19,18 @@ public class User {
     @NotNull
     private String email;
 
+    @NotNull
     private String profilePicture;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location currentLocation;
 
-    @OneToMany
+    @OneToMany(mappedBy = "organizer")
     private List<Trip> trips;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookedSpots> bookedSpots;
 
     private String facebookAuthenticationToken;
 

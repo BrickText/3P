@@ -10,9 +10,13 @@ public class BookedSpots {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    private BookingStatus bookingStatus;
-
+    @ManyToOne
+    @JoinColumn(name = "trip_id")
     private Trip trip;
+
+    private BookingStatus bookingStatus;
 }

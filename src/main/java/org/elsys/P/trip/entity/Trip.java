@@ -2,8 +2,12 @@ package org.elsys.P.trip.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.awt.*;
+import java.awt.print.Book;
 import java.sql.Date;
+import java.util.List;
 
+@Entity
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,12 +16,6 @@ public class Trip {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User organizer;
-
-    @NotNull
-    private Location startLocation;
-
-    @NotNull
-    private Location endLocation;
 
     @NotNull
     private int allSpots;
@@ -36,6 +34,12 @@ public class Trip {
     @NotNull
     private Date endDate;
 
+    @OneToMany(mappedBy = "trip")
+    private List<BookedSpots> bookedSpots;
+
+    @OneToMany(mappedBy = "trip")
+    private List<Path> paths;
+
     public int getId() {
         return id;
     }
@@ -46,22 +50,6 @@ public class Trip {
 
     public void setOrganizer(User organizer) {
         this.organizer = organizer;
-    }
-
-    public Location getStartLocation() {
-        return startLocation;
-    }
-
-    public void setStartLocation(Location startLocation) {
-        this.startLocation = startLocation;
-    }
-
-    public Location getEndLocation() {
-        return endLocation;
-    }
-
-    public void setEndLocation(Location endLocation) {
-        this.endLocation = endLocation;
     }
 
     public int getAllSpots() {
