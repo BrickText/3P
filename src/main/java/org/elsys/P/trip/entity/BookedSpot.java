@@ -7,6 +7,7 @@ import java.awt.print.Book;
 import java.io.Serializable;
 
 @Entity
+@Table(name="booked_spot", schema = "public")
 public class BookedSpot {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

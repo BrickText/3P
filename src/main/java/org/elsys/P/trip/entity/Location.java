@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+@Table(name="location", schema = "public")
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

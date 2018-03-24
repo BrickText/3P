@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
+@Table(name="path", schema = "public")
 public class Path {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
