@@ -2,18 +2,16 @@ package org.elsys.P.trip.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.awt.*;
-import java.awt.print.Book;
 import java.sql.Date;
 import java.util.List;
 
 @Entity
 public class Trip {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "serial")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User organizer;
 
@@ -34,13 +32,15 @@ public class Trip {
     @NotNull
     private Date endDate;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private List<BookedSpot> bookedSpots;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private List<Path> paths;
 
-    public Trip(User organizer, int allSpots, int freeSpots, String description, int price,
+    public Trip() {}
+
+    public Trip(int id, User organizer, int allSpots, int freeSpots, String description, int price,
                 Date startDate, Date endDate, List<BookedSpot> bookedSpots, List<Path> paths) {
         this.id = id;
         this.organizer = organizer;

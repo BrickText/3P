@@ -27,6 +27,8 @@ public class Path {
     @OneToOne(mappedBy = "path")
     private Location location;
 
+    public Path() {}
+
     public Path(Trip trip, Transport transportType, Date fromDate, Date toDate, Location location, int orderNum) {
         this.trip = trip;
         this.transportType = transportType;

@@ -35,6 +35,8 @@ public class User {
 
     private boolean active;
 
+    public User() {}
+
     public User(@NotNull String username, @NotNull String password, @NotNull String email,
                 String profilePicture, Location currentLocation, List<Trip> trips,
                 List<BookedSpot> bookedSpots, String facebookAuthenticationToken) {

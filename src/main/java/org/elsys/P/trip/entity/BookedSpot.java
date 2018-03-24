@@ -3,6 +3,7 @@ package org.elsys.P.trip.entity;
 import org.elsys.P.trip.entity.enums.BookingStatus;
 
 import javax.persistence.*;
+import java.awt.print.Book;
 import java.io.Serializable;
 
 @Entity
@@ -20,6 +21,8 @@ public class BookedSpot {
     private Trip trip;
 
     private BookingStatus bookingStatus;
+
+    public BookedSpot() {}
 
     public BookedSpot(User user, Trip trip, BookingStatus bookingStatus) {
         this.user = user;

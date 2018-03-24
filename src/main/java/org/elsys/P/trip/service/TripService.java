@@ -3,6 +3,7 @@ package org.elsys.P.trip.service;
 import org.elsys.P.trip.entity.Location;
 import org.elsys.P.trip.entity.Path;
 import org.elsys.P.trip.entity.Trip;
+import org.elsys.P.trip.entity.User;
 import org.elsys.P.trip.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,7 @@ public class TripService {
 
     public void addOrUpdateTrip(Trip trip) {
         tripRepository.save(trip);
+        System.out.println("Trip was added");
     }
 
     public void deleteTripById(int id) {
@@ -66,9 +68,9 @@ public class TripService {
     }
 
     public void createTrip(int allSpots, int freeSpots, int price, Date startDate, Date endDate) {
-        Trip trip =  new Trip(null, allSpots, freeSpots, "",
+        Trip trip =  new Trip(12, new User(), allSpots, freeSpots, "",
                 price, startDate, endDate, null, null);
-
+        System.out.println("Trip was created: " + trip.getId());
         this.addOrUpdateTrip(trip);
     }
 }
