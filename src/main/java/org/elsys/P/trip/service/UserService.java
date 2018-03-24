@@ -4,6 +4,7 @@ import org.elsys.P.trip.entity.Trip;
 import org.elsys.P.trip.entity.User;
 import org.elsys.P.trip.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
