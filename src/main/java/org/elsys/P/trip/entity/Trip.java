@@ -6,9 +6,10 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
+@Table(name="trip", schema = "public")
 public class Trip {
     @Id
-    @Column(columnDefinition = "serial")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @ManyToOne(cascade = CascadeType.ALL)
