@@ -38,6 +38,12 @@ public class User {
 
     public User() {}
 
+    public User(@NotNull String username, @NotNull String password, @NotNull String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
     public User(@NotNull String username, @NotNull String password, @NotNull String email,
                 String profilePicture, Location currentLocation, List<Trip> trips,
                 List<BookedSpot> bookedSpots, String facebookAuthenticationToken) {
