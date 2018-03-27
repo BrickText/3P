@@ -24,14 +24,12 @@ public class TripController {
         return tripService.getAllTrips();
     }
 
-//    Couldn't find possible way to convert dynamically String to SQL Datetime
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void CreateTrip(@RequestParam("allSpots") int allSpots, @RequestParam("freeSpots") int freeSpots,
-                           @RequestParam("price") int price) {
-        System.out.println(allSpots);
-        tripService.createTrip(allSpots, freeSpots, price, new Date(Calendar.getInstance().getTime().getTime()),
-                new Date(Calendar.getInstance().getTime().getTime()));
+    public void CreateTrip(@RequestParam("user") int userID, @RequestParam("allSpots") int allSpots,
+                           @RequestParam("description") String description, @RequestParam("price") int price,
+                           @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
+        tripService.createTrip(userID, allSpots, description, price, startDate, endDate);
     }
 
     @RequestMapping(value="/t", method= RequestMethod.GET)

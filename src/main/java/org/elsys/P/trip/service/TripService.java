@@ -19,6 +19,9 @@ public class TripService {
     @Autowired
     private TripRepository tripRepository;
 
+    @Autowired
+    private UserService userService;
+
     public List<Trip> getAllTrips() {
         List<Trip> trips = new ArrayList<>();
 
@@ -67,11 +70,17 @@ public class TripService {
         tripRepository.deleteById(id);
     }
 
-    public void createTrip(int allSpots, int freeSpots, int price, Date startDate, Date endDate) {
-        Trip trip =  new Trip(12, new User(), allSpots, freeSpots, "",
-                price, startDate, endDate, null, null);
-        System.out.println("Trip was created: " + trip.getId());
+    public void createTrip(int userID, int allSpots, String description, int price, String startDateString,
+                           String endDateString) {
+        User user = userService.getUserById(userID);
+
+        Date startDate = Date.valueOf(startDateString);
+        Date endDate = Date.valueOf(endDateString);
+
+        Trip trip =  new Trip(user, allSpots, description, price, startDate, endDate);
+
         this.addOrUpdateTrip(trip);
     }
+
 }
 

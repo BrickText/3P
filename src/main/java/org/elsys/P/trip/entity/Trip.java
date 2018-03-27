@@ -55,6 +55,17 @@ public class Trip {
         this.paths = paths;
     }
 
+    public Trip(User organizer, int allSpots, String description, int price,
+                Date startDate, Date endDate) {
+        this.organizer = organizer;
+        this.allSpots = allSpots;
+        this.freeSpots = allSpots;
+        this.description = description;
+        this.price = price;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public int getId() {
         return id;
     }
