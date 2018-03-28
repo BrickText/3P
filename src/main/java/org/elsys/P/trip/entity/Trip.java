@@ -12,7 +12,7 @@ public class Trip {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User organizer;
 
@@ -33,10 +33,10 @@ public class Trip {
     @NotNull
     private Date endDate;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.PERSIST)
     private List<BookedSpot> bookedSpots;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.PERSIST)
     private List<Path> paths;
 
     public Trip() {}
