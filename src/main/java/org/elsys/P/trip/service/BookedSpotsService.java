@@ -14,29 +14,43 @@ public class BookedSpotsService {
     @Autowired
     private BookedSpotsRepository bookedSpotsRepository;
 
-    public List<BookedSpot> getAllLocations() {
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private TripService tripService;
+
+    public List<BookedSpot> getAllBookedSpots() {
         java.util.List<BookedSpot> bookedSpots = new ArrayList<>();
 
         bookedSpotsRepository.findAll().forEach(bookedSpots::add);
         return bookedSpots;
     }
 
-    public BookedSpot getLocationById(int id) {
+    public BookedSpot getBookedSpotById(int id) {
         return bookedSpotsRepository.findById(id).get();
     }
 
-    public void updateLocation(int id, BookedSpot bs) {
+    public void updateBookedSpot(int id, BookedSpot bs) {
         if (bs.getId() == id) {
             bookedSpotsRepository.save(bs);
         }
     }
 
-    public void addOrUpdateLocation(BookedSpot bs) {
+    public void addOrUpdateBookedSpot(BookedSpot bs) {
         bookedSpotsRepository.save(bs);
     }
 
-    public void deleteLocationById(int id) {
+    public void deleteBookedSpotById(int id) {
         bookedSpotsRepository.deleteById(id);
+    }
+
+    public void createBookedSpot (int userId, int tripId, String bookingStatus) {
+        User user = userService.getUserById(userId);
+        Trip trip = tripService.getTripById(tripId);
+        BookingStatus bs = BookingStatus.stringToBookingSatus(bookingStatus);
+
+        this.addOrUpdateBookedSpot(new BookedSpot (user, trip, bs));
     }
 
     public void updateBookingStatus(User us, BookedSpot bSpot, BookingStatus bStatus) {
@@ -44,5 +58,11 @@ public class BookedSpotsService {
             bSpot.setBookingStatus(bStatus);
             bookedSpotsRepository.save(bSpot);
         }
+    }
+
+    public void updateBookingStatus(int userId, int bookedSpotId, BookingStatus bs) {
+      this.updateBookingStatus(userService.getUserById(userId),
+      this.getBookedSpotById(bookedSpotId), bs);
+
     }
 }
