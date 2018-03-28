@@ -42,6 +42,15 @@ public class Location {
         this.users = users;
     }
 
+    public Location(@NotNull String name, @NotNull int longtitude,
+                    @NotNull int latitude, @NotNull String description, Path path) {
+        this.name = name;
+        this.longtitude = longtitude;
+        this.path = path;
+        this.latitude = latitude;
+        this.description = description;
+    }
+
     public List<User> getUser() {
         return users;
     }
