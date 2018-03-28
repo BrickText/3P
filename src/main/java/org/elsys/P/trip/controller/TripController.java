@@ -19,9 +19,8 @@ public class TripController {
     private TripService tripService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Trip> getAllTrips() {
-        System.out.println("Getting all trips was called");
-        return tripService.getAllTrips();
+    public List<Trip> getAllIncomingTrips() {
+        return tripService.getAllIncomingTrips();
     }
 
     @RequestMapping(method = RequestMethod.POST)

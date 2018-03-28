@@ -29,6 +29,12 @@ public class TripService {
         return trips;
     }
 
+    public List<Trip> getAllIncomingTrips() {
+        return StreamSupport.stream(tripRepository.findAll().spliterator(), false)
+                .filter(t -> t.getStartDate().compareTo(new Date(Calendar.getInstance().getTime().getTime())) >= 0)
+                .collect(Collectors.toList());
+    }
+
     public Trip getTripById(int id) {
         return tripRepository.findById(id).get();
     }
@@ -63,7 +69,6 @@ public class TripService {
 
     public void addOrUpdateTrip(Trip trip) {
         tripRepository.save(trip);
-        System.out.println("Trip was added");
     }
 
     public void deleteTripById(int userID, int tripID) {
