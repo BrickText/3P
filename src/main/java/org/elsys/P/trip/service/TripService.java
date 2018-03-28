@@ -29,7 +29,7 @@ public class TripService {
         return trips;
     }
 
-    public List<Trip> getAllIncomingTrips() {
+    public List<Trip> getAllFutureTrips() {
         return StreamSupport.stream(tripRepository.findAll().spliterator(), false)
                 .filter(t -> t.getStartDate().compareTo(new Date(Calendar.getInstance().getTime().getTime())) >= 0)
                 .collect(Collectors.toList());
@@ -92,5 +92,23 @@ public class TripService {
         this.addOrUpdateTrip(trip);
     }
 
+    public List<Trip> getTripForUser(int userId) {
+        return StreamSupport.stream(tripRepository.findAll().spliterator(), false)
+                .filter(t -> t.getBookedSpots().stream().anyMatch(bs -> bs.getUser().getId() == userId))
+                .collect(Collectors.toList());
+    }
+
+    public List<Trip> getPastTrips() {
+        return StreamSupport.stream(tripRepository.findAll().spliterator(), false)
+                .filter(t -> t.getStartDate().compareTo(new Date(Calendar.getInstance().getTime().getTime())) < 0)
+                .collect(Collectors.toList());
+    }
+
+    public List<Trip> getPastTripsForUser(int userId) {
+        return StreamSupport.stream(tripRepository.findAll().spliterator(), false)
+                .filter(t -> t.getStartDate().compareTo(new Date(Calendar.getInstance().getTime().getTime())) < 0
+                && t.getBookedSpots().stream().anyMatch(bs -> bs.getUser().getId() == userId))
+                .collect(Collectors.toList());
+    }
 }
 

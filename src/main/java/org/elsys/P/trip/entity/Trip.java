@@ -129,4 +129,10 @@ public class Trip {
     public List<Path> getPaths() {
         return paths;
     }
+
+    public void setBookedSpots(List<BookedSpot> bookedSpots) {
+        this.bookedSpots = bookedSpots;
+    }
+
+    public List<BookedSpot> getBookedSpots() {return bookedSpots;}
 }
