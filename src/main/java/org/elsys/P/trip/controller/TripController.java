@@ -45,7 +45,7 @@ public class TripController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void CreateTrip(@RequestParam("userId") int userID, @RequestParam("allSpots") int allSpots,
+    public void createTrip(@RequestParam("userId") int userID, @RequestParam("allSpots") int allSpots,
                            @RequestParam("description") String description, @RequestParam("price") int price,
                            @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
         System.out.println(userID + allSpots + description + price + startDate + endDate);
@@ -54,7 +54,7 @@ public class TripController {
 
     @RequestMapping(method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void DeleteTrip(@RequestParam("userId") int userID, @RequestParam("tripId") int tripID) {
+    public void deleteTrip(@RequestParam("userId") int userID, @RequestParam("tripId") int tripID) {
         tripService.deleteTripById(userID, tripID);
     }
 
