@@ -1,11 +1,15 @@
 package org.elsys.P.trip.service;
 
+import org.elsys.P.trip.entity.Location;
 import org.elsys.P.trip.entity.Path;
 import org.elsys.P.trip.entity.Trip;
+import org.elsys.P.trip.entity.enums.Transport;
 import org.elsys.P.trip.repository.PathRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +17,11 @@ import java.util.List;
 public class PathService {
     @Autowired
     private PathRepository pathRepository;
+
+    @Autowired
+    private TripService tripService;
+
+    @Autowired LocationService locationService;
 
     public List<Path> getAllPaths() {
         List<Path> Paths = new ArrayList<>();
@@ -37,5 +46,19 @@ public class PathService {
 
     public void deletePathById(int id) {
         pathRepository.deleteById(id);
+    }
+
+    public void createPath(int tripId, String transportTypeStr, String fromDate, String toDate,
+                           int locationId, int orderNum) {
+        Trip trip = tripService.getTripById(tripId);
+        Transport transportType = Transport.stringToTransport(transportTypeStr);
+        Location location = locationService.getLocationById(locationId);
+
+        Path path = new Path(trip, transportType, Date.valueOf(fromDate), Date.valueOf(toDate),
+                location, orderNum);
+    }
+
+    public void deletePathById(int tripId, int userId, int pathId) {
+
     }
 }
