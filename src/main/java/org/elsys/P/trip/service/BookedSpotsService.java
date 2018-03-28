@@ -21,7 +21,7 @@ public class BookedSpotsService {
     private TripService tripService;
 
     public List<BookedSpot> getAllBookedSpots() {
-        java.util.List<BookedSpot> bookedSpots = new ArrayList<>();
+        List<BookedSpot> bookedSpots = new ArrayList<>();
 
         bookedSpotsRepository.findAll().forEach(bookedSpots::add);
         return bookedSpots;
@@ -45,10 +45,10 @@ public class BookedSpotsService {
         bookedSpotsRepository.deleteById(id);
     }
 
-    public void createBookedSpot (int userId, int tripId, String bookingStatus) {
+    public void createBookedSpot (int userId, int tripId) {
         User user = userService.getUserById(userId);
         Trip trip = tripService.getTripById(tripId);
-        BookingStatus bs = BookingStatus.stringToBookingSatus(bookingStatus);
+        BookingStatus bs = BookingStatus.NOT_CONFIRMED;
 
         this.addOrUpdateBookedSpot(new BookedSpot (user, trip, bs));
     }

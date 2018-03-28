@@ -23,7 +23,7 @@ public class BookedSpotsController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void createBookedSpot (@RequestParam("userId") int userId, @RequestParam("tripId") int tripId) {
-        bookedSpotsService.createBookedSpot(userId, tripId, "unconfirmed");
+        bookedSpotsService.createBookedSpot(userId, tripId);
 
     }
 

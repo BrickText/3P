@@ -1,5 +1,6 @@
 package org.elsys.P.trip.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.elsys.P.trip.entity.enums.BookingStatus;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class BookedSpot {
 
     @ManyToOne
     @JoinColumn(name = "trip_id")
+    @JsonIgnore
     private Trip trip;
 
     private BookingStatus bookingStatus;
