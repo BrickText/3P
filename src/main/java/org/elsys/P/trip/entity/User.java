@@ -1,5 +1,7 @@
 package org.elsys.P.trip.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -15,6 +17,7 @@ public class User {
     private String username;
 
     @NotNull
+    @JsonIgnore
     private String password;
 
     @NotNull
