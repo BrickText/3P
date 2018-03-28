@@ -15,6 +15,9 @@ public class LocationService {
     @Autowired
     private LocationRepository locationRepository;
 
+    @Autowired
+    private PathService pathService;
+
     public List<Location> getAllLocations() {
         java.util.List<Location> locations = new ArrayList<>();
 
@@ -46,4 +49,13 @@ public class LocationService {
         locationRepository.deleteById(id);
     }
 
+    public void createLocation(String name, int lng, int lat, String description, int pathId) {
+        Location lc = new Location(name, lng, lat, description, pathService.getPathById(pathId));
+        this.addOrUpdateLocation(lc);
+    }
+
+    // TODO: We should check if the user can delete the location -> Is he trip owner OR Is this his locaiton atm.
+    public void deleteLocation(int locationId, int userId) {
+        this.deleteLocationById(locationId);
+    }
 }
