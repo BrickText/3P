@@ -66,8 +66,13 @@ public class TripService {
         System.out.println("Trip was added");
     }
 
-    public void deleteTripById(int id) {
-        tripRepository.deleteById(id);
+    public void deleteTripById(int userID, int tripID) {
+        Trip trip = this.getTripById(tripID);
+        User user = userService.getUserById(userID);
+
+        if (trip.getOrganizer() == user) {
+            tripRepository.deleteById(tripID);
+        }
     }
 
     public void createTrip(int userID, int allSpots, String description, int price, String startDateString,

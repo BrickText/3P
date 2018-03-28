@@ -32,8 +32,10 @@ public class TripController {
         tripService.createTrip(userID, allSpots, description, price, startDate, endDate);
     }
 
-    @RequestMapping(value="/t", method= RequestMethod.GET)
-    public String test() {
-        return "Test";
+    @RequestMapping(method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void DeleteTrip(@RequestParam("user") int userID, @RequestParam("trip") int tripID) {
+        tripService.deleteTripById(userID, tripID);
     }
+
 }
