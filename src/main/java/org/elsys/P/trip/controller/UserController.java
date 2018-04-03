@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 
 @RestController
@@ -21,6 +22,11 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public Principal user(Principal principal) {
+        return principal;
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login() {

@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Hello World!</title>
+    <title>Hello Facebook</title>
 </head>
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3>
+
+<h4>Here is your feed:</h4>
+
+<div th:each="post:${feed}">
+    <b th:text="${post.from.name}">from</b> wrote:
+    <p th:text="${post.message}">message text</p>
+    <img th:if="${post.picture}" th:src="${post.picture}"/>
+    <hr/>
+</div>
 </body>
 </html>
