@@ -1,7 +1,9 @@
 package org.elsys.P.trip.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.elsys.P.trip.entity.enums.BookingStatus;
+import org.elsys.P.trip.entity.views.View;
 
 import javax.persistence.*;
 import java.awt.print.Book;
@@ -12,17 +14,20 @@ import java.io.Serializable;
 public class BookedSpot {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(View.Summary.class)
     private int id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonView(View.Summary.class)
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "trip_id")
-    @JsonIgnore
+    @JsonView(View.Summary.class)
     private Trip trip;
 
+    @JsonView(View.Summary.class)
     private BookingStatus bookingStatus;
 
     public BookedSpot() {}

@@ -1,7 +1,9 @@
 package org.elsys.P.trip.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.elsys.P.trip.entity.BookedSpot;
 import org.elsys.P.trip.entity.enums.BookingStatus;
+import org.elsys.P.trip.entity.views.View;
 import org.elsys.P.trip.service.BookedSpotsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ public class BookedSpotsController {
     private BookedSpotsService bookedSpotsService;
 
     @RequestMapping(method = RequestMethod.GET)
+    @JsonView(View.Summary.class)
     public List<BookedSpot> getAllBookedSpots () {
         return bookedSpotsService.getAllBookedSpots();
     }
