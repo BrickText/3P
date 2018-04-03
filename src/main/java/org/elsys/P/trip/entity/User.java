@@ -1,6 +1,8 @@
 package org.elsys.P.trip.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import org.elsys.P.trip.entity.views.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,9 +13,11 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(View.Summary.class)
     private int id;
 
     @NotNull
+    @JsonView(View.Summary.class)
     private String username;
 
     @NotNull
@@ -21,6 +25,7 @@ public class User {
     private String password;
 
     @NotNull
+    @JsonView(View.Summary.class)
     private String email;
 
     private String profilePicture;
