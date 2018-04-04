@@ -83,14 +83,14 @@ public class TripService {
         }
     }
 
-    public void createTrip(int userID, int allSpots, String description, int price, String startDateString,
-                           String endDateString) {
+    public void createTrip(String tripName, int userID, int allSpots, String description, int price,
+                           String startDateString, String endDateString) {
         User user = userService.getUserById(userID);
 
         Date startDate = Date.valueOf(startDateString);
         Date endDate = Date.valueOf(endDateString);
 
-        Trip trip =  new Trip(user, allSpots, description, price, startDate, endDate);
+        Trip trip =  new Trip(tripName, user, allSpots, description, price, startDate, endDate);
 
         this.addOrUpdateTrip(trip);
     }

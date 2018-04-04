@@ -55,6 +55,7 @@ public class PathService {
 
         Path path = new Path(trip, transportType, Date.valueOf(fromDate), Date.valueOf(toDate),
                 location, orderNum);
+        addOrUpdatePath(path);
     }
 
     public void deletePathById(int tripId, int userId, int pathId) {

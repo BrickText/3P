@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location</title>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </head>
+</head>
+<body>
+
+<!-- TRIP MODAL-->
+<button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#trip">Create trip</button>
+<div class="modal fade" id="trip" tabindex="-1" role="dialog" aria-labelledby="#trip" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form  name='f' action="/trip" method='POST'>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Trip</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Organizer id</label>
+                <div class="input-group mb-3">
+                    <input type="number" required class="form-control" placeholder="Username" aria-label="Username" name="userId">
+                </div>
+                <label>Trip name</label>
+                <div class="input-group mb-3">
+                    <input type="number" required class="form-control" placeholder="Username" aria-label="Username" name="tripName">
+                </div>
+                <label>All Spots</label>
+                <div class="input-group mb-3">
+                    <input type="Number" required class="form-control" placeholder="Number of spots" name="allSpots">
+                </div>
+                <label>Description</label>
+                <div class="input-group mb-3">
+                    <input type="text" required class="form-control" placeholder="Write here your trip description" name="description">
+                </div>
+                <label>Price</label>
+                <div class="input-group mb-3">
+                    <input type="number" required class="form-control" placeholder="Pirce" name="price">
+                </div>
+                <label>Start date</label>
+                <div class="input-group mb-3">
+                    <input type="date" required class="form-control" placeholder="password" name="startDate">
+                </div>
+                <label>End date</label>
+                <div class="input-group mb-3">
+                    <input type="date" required class="form-control" placeholder="password" name="endDate">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- LOCATION MODAL-->
+<button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#location">Create location</button>
+<div class="modal fade" id="location" tabindex="-1" role="dialog" aria-labelledby="#trip" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form  name='f' action="/location" method='POST'>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="locationLabel">Create Trip</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label>Location name:</label>
+                    <div class="input-group mb-3">
+                        <input type="text" required class="form-control" placeholder="Sofia, Burgas..." name="name">
+                    </div>
+                    <label>Longtitude</label>
+                    <div class="input-group mb-3">
+                        <input type="number" required class="form-control" placeholder="Location longitude" name="longitude">
+                    </div>
+                    <label>Latitude</label>
+                    <div class="input-group mb-3">
+                        <input type="text" required class="form-control" placeholder="Location latitude" name="latitude">
+                    </div>
+                    <label>Description</label>
+                    <div class="input-group mb-3">
+                        <input type="text" required class="form-control" placeholder="Write here your trip description" name="description">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- BOOKED SPOTS MODAL-->
+<form  name='f' action="/bookedspots" method='POST'>
+    <!--Should be changed with data-->
+    <input type="number" required class="form-control" name="userId">
+    <input type="number" required class="form-control" name="tripId">
+
+    <button type="submit" class="btn btn-primary">Book spot</button>
+</form>
+
+
+
+
+
+<!-- PATH MODAL -->
+<button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#path">Create path</button>
+<div class="modal fade" id="path" tabindex="-1" role="dialog" aria-labelledby="#trip" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form  name='f' action="/path" method='POST'>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pathLabel">Create path</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label>Trip id</label>
+                    <div class="input-group mb-3">
+                        <input type="number" required class="form-control" placeholder="Trip id" name="tripId">
+                    </div>
+                    <label>Transport type</label>
+                    <div class="input-group mb-3">
+                        <input type="text" required class="form-control" placeholder="Transport type" name="transportType">
+                    </div>
+                    <label>From Date</label>
+                    <div class="input-group mb-3">
+                        <input type="date" required class="form-control" placeholder="From date" name="fromDate">
+                    </div>
+                    <label>To Date</label>
+                    <div class="input-group mb-3">
+                        <input type="date" required class="form-control" placeholder="To date" name="toDate">
+                    </div>
+                    <label>Location Id</label>
+                    <div class="input-group mb-3">
+                        <input type="number" required class="form-control" placeholder="Location id" name="locationId">
+                    </div><label>Order number</label>
+                    <div class="input-group mb-3">
+                        <input type="number" required class="form-control" placeholder="Order num" name="orderNum">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

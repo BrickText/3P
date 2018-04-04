@@ -29,6 +29,14 @@ public class LocationController {
     @ResponseStatus(value = HttpStatus.OK)
     public void createLocation(@RequestParam("name") String name,
                                @RequestParam("longitude") int lng, @RequestParam("latitude") int lat,
+                               @RequestParam("description") String description) {
+        locationService.createLocation(name, lng, lat, description);
+    }
+
+    @RequestMapping(value = "/withpath", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void createLocation(@RequestParam("name") String name,
+                               @RequestParam("longitude") int lng, @RequestParam("latitude") int lat,
                                @RequestParam("description") String description, @RequestParam("pathId") int pathId) {
         locationService.createLocation(name, lng, lat, description, pathId);
     }
