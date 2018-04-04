@@ -21,9 +21,6 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailsService userDetailsService;
 
-    @Autowired
-    private UserService userService;
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -54,10 +51,5 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/homepage.html")
                 .failureUrl("/login")
                 .permitAll();
-    }
-
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(11);
     }
 }
