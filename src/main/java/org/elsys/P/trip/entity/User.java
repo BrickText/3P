@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name="user", schema = "public")
@@ -29,6 +28,12 @@ public class User {
     @NotNull
     @JsonView(View.Summary.class)
     private String email;
+
+    @NotNull
+    private String firstName;
+
+    @NotNull
+    private String lastName;
 
     private String profilePicture;
 
@@ -99,6 +104,22 @@ public class User {
         this.email = email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getProfilePicture() {
         return profilePicture;
     }
@@ -135,7 +156,7 @@ public class User {
         this.roles = roles;
     }
 
-    public List<String> getRoles() {
-        return roles.stream().map(role -> role.toString()).collect(Collectors.toList());
+    public Collection<Role> getRoles() {
+        return roles;
     }
 }
