@@ -2,8 +2,8 @@ package org.elsys.PPP.trip.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.elsys.PPP.trip.entity.enums.BookingStatus;
-import org.elsys.PPP.views.View;
 import org.elsys.PPP.user.entity.User;
+import org.elsys.PPP.views.View;
 
 import javax.persistence.*;
 

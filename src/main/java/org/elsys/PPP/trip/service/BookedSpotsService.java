@@ -1,6 +1,7 @@
 package org.elsys.PPP.trip.service;
 
-import org.elsys.PPP.trip.entity.*;
+import org.elsys.PPP.trip.entity.BookedSpot;
+import org.elsys.PPP.trip.entity.Trip;
 import org.elsys.PPP.trip.entity.enums.BookingStatus;
 import org.elsys.PPP.trip.repository.BookedSpotsRepository;
 import org.elsys.PPP.user.entity.User;
