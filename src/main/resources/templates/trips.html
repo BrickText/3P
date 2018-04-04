@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3P</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://fb.me/react-0.14.6.js"></script>
+    <script src="https://fb.me/react-dom-0.14.6.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/jsx">
+        var uri = "/trip/future";
+        beforecreate: $.ajax({
+            sync: true,
+            url: uri,
+            method: 'GET'
+        }).then(function(data) {
+            var tripsCollection = data;
+            console.log(tripsCollection);
+            ReactDOM.render(<Trips trips={tripsCollection} />, document.getElementById('trips-details'));
+        }.bind(this));
+
+        var Trips = React.createClass({
+            render: function() {
+                return (
+                        <div>
+                        {this.props.trips.map(function (trip, i) {
+                            return <Trip key={trip.id} trip={trip}/>;
+                        })}
+                        </div>
+                );
+            }
+        });
+        var Trip = React.createClass({
+            render: function() {
+                return (
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                                <div className="panel panel-info">
+                                    <div className="panel-heading">
+                                        <h3 className="panel-title">{this.props.trip.tripName}</h3>
+                                    </div>
+                                    <div className="panel-body">
+                                        <div className="row">
+                                            <div className=" col-md-9 col-lg-9 ">
+                                                <table className="table table-user-information">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Organizer:</td>
+                                                            <td>{this.props.trip.organizer.firstName + ' ' + this.props.trip.organizer.lastName}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                );
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">3P</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trips">Trips</a>
+                </li>
+            </ul>
+            <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#loginModal">Login/Register</button>
+        </div>
+    </nav>
+    <div class="container" id="trips-details"></div>
+</body>
+</html>
