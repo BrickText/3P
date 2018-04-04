@@ -20,27 +20,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String showRegistrationForm(final HttpServletRequest request, final Model model) {
-        final User accountDto = new User();
-        model.addAttribute("user", accountDto);
-        return "registration";
-    }
-
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public void registerUserAccount(@RequestParam("username") String username, @RequestParam("password") String password,
-            @RequestParam("email") String email) {
-        User registered = new User(username, password, email);
-        System.out.println("Sad?");
-        System.out.println(registered.getUsername());
-        System.out.println(registered.getEmail());
-        System.out.println(registered.getPassword());
-        createUserAccount(registered);
-    }
-
-    private User createUserAccount(User accountDto) {
-        userService.addOrUpdateUser(accountDto);
-        return accountDto;
+    public void registerUserAccount(
+            @RequestParam("username") String username, @RequestParam("password") String password,
+            @RequestParam("email") String email,
+            @RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) {
+        System.out.println(password);
+        userService.registerUser(username, firstName, lastName, password, email);
     }
 
     @RequestMapping(method = RequestMethod.GET)

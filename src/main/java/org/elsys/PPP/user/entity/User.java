@@ -60,8 +60,11 @@ public class User {
 
     public User() {}
 
-    public User(@NotNull String username, @NotNull String password, @NotNull String email) {
+    public User(@NotNull String username, @NotNull String firstName, @NotNull String lastName,
+                @NotNull String password, @NotNull String email) {
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.email = email;
     }
