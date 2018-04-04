@@ -14,6 +14,9 @@ public class Trip {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
+    @NotNull
+    private String tripName;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User organizer;
@@ -57,8 +60,9 @@ public class Trip {
         this.paths = paths;
     }
 
-    public Trip(User organizer, int allSpots, String description, int price,
+    public Trip(String tripName, User organizer, int allSpots, String description, int price,
                 Date startDate, Date endDate) {
+        this.tripName = tripName;
         this.organizer = organizer;
         this.allSpots = allSpots;
         this.freeSpots = allSpots;
@@ -70,6 +74,14 @@ public class Trip {
 
     public int getId() {
         return id;
+    }
+
+    public String getTripName() {
+        return tripName;
+    }
+
+    public void setTripName(String tripName) {
+        this.tripName = tripName;
     }
 
     public User getOrganizer() {

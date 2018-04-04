@@ -42,11 +42,11 @@ public class TripController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void createTrip(@RequestParam("userId") int userID, @RequestParam("allSpots") int allSpots,
-                           @RequestParam("description") String description, @RequestParam("price") int price,
-                           @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
-        System.out.println(userID + allSpots + description + price + startDate + endDate);
-        tripService.createTrip(userID, allSpots, description, price, startDate, endDate);
+    public void createTrip(@RequestParam("tripName") String tripName, @RequestParam("userId") int userID,
+                           @RequestParam("allSpots") int allSpots, @RequestParam("description") String description,
+                           @RequestParam("price") int price, @RequestParam("startDate") String startDate,
+                           @RequestParam("endDate") String endDate) {
+        tripService.createTrip(tripName, userID, allSpots, description, price, startDate, endDate);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
