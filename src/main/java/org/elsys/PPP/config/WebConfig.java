@@ -42,7 +42,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/user/registration*", "/registrationConfirm*", "/expiredAccount*", "/registration*",
                         "/badUser*", "/user/resendRegistrationToken*" ,"/forgetPassword*", "/user/resetPassword*",
                         "/user/changePassword*", "/emailError*", "/resources/**","/old/user/registration*","/successRegister*","/qrcode*","/perform_login",
-                        "/webjars/***")
+                        "/webjars/***", "/forms.html")
                 .permitAll()
                 .anyRequest().hasAuthority("READ_PRIVILEGE")
                 .and()
