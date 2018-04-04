@@ -28,7 +28,7 @@
                 return (
                         <div>
                         {this.props.trips.map(function (trip, i) {
-                            return <Trip key={trip.id} trip={trip}/>;
+                            return <Trip key={trip.id} trip={trip} tripId={"#" + trip.id}/>;
                         })}
                         </div>
                 );
@@ -37,29 +37,85 @@
         var Trip = React.createClass({
             render: function() {
                 return (
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-                                <div className="panel panel-info">
-                                    <div className="panel-heading">
-                                        <h3 className="panel-title">{this.props.trip.tripName}</h3>
+                    <div>
+                        <a className="btn nav-link"  data-toggle="modal" data-target={this.props.tripId}>
+                            <div className="row" id="trip" data-key={this.props.trip.id}>
+                                <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                                    <div className="panel panel-info">
+                                        <div className="panel-heading">
+                                            <h3 className="panel-title">{this.props.trip.tripName}</h3>
+                                        </div>
+                                        <div className="panel-body">
+                                            <div className="row">
+                                                <div className=" col-md-9 col-lg-9 ">
+                                                    <table className="table table-user-information">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Organizer:</td>
+                                                                <td>{this.props.trip.organizer.firstName + ' ' + this.props.trip.organizer.lastName}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="panel-body">
-                                        <div className="row">
-                                            <div className=" col-md-9 col-lg-9 ">
-                                                <table className="table table-user-information">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Organizer:</td>
-                                                            <td>{this.props.trip.organizer.firstName + ' ' + this.props.trip.organizer.lastName}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div className="modal fade" id={this.props.trip.id} role="dialog" aria-labelledby={this.props.trip.id} aria-hidden="true">
+                            <div className="modal-dialog" role="document">
+                                <div className="modal-content">
+                                    <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                                        <div className="panel panel-info">
+                                            <div className="panel-heading">
+                                                <h3 className="panel-title">{this.props.trip.tripName}</h3>
+                                            </div>
+                                            <div className="panel-body">
+                                                <div className="row">
+                                                    <div className=" col-md-9 col-lg-9 ">
+                                                        <table className="table table-user-information">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>Organizer:</td>
+                                                                <td>{this.props.trip.organizer.firstName + ' ' + this.props.trip.organizer.lastName}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>All Spots:</td>
+                                                                <td>{this.props.trip.allSpots}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Free Spots:</td>
+                                                                <td>{this.props.trip.freeSpots}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Price:</td>
+                                                                <td>{this.props.trip.price}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Description:</td>
+                                                                <td>{this.props.trip.description}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Start Date:</td>
+                                                                <td>{this.props.trip.startDate}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>End Date:</td>
+                                                                <td>{this.props.trip.endDate}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 );
             }
         });
