@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -20,6 +21,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyUserDetailsService userDetailsService;
+
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
@@ -51,6 +55,16 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/index")
                 .failureUrl("/index")
+                .and()
+                .sessionManagement()
+                .invalidSessionUrl("/index")
+                .maximumSessions(1).sessionRegistry(sessionRegistry).and()
+                .sessionFixation().none()
+                .and()
+                .logout()
+                .invalidateHttpSession(false)
+                .logoutSuccessUrl("/index")
+                .deleteCookies("JSESSIONID")
                 .permitAll();
     }
 }

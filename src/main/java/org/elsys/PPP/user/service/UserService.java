@@ -5,6 +5,7 @@ import org.elsys.PPP.user.entity.User;
 import org.elsys.PPP.user.repository.RoleRepository;
 import org.elsys.PPP.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class UserService {
+public class UserService{
     @Autowired
     private UserRepository userRepository;
 
@@ -25,6 +26,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -39,14 +43,14 @@ public class UserService {
 
     public boolean loginWithUsername(String username, String password) {
         List<User> users = StreamSupport.stream(userRepository.findAll().spliterator(), false)
-            .filter(u -> u.getUsername() == username && u.getPassword() == password)
+            .filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password))
             .collect(Collectors.toList());
         return  setUsersActive(users, true);
     }
 
     public boolean loginWithEmail(String email, String password) {
         List<User> users = StreamSupport.stream(userRepository.findAll().spliterator(), false)
-                .filter(u -> u.getEmail() == email && u.getPassword() == password)
+                .filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password))
                 .collect(Collectors.toList());
         return setUsersActive(users, true);
     }
@@ -102,4 +106,9 @@ public class UserService {
         user.setRoles(roles);
         this.addOrUpdateUser(user);
     }
+
+    public List<String> getUsersFromSessionRegistry() {
+        return sessionRegistry.getAllPrincipals().stream().filter((u) -> !sessionRegistry.getAllSessions(u, false).isEmpty()).map(Object::toString).collect(Collectors.toList());
+    }
+
 }
