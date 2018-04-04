@@ -76,4 +76,11 @@ public class UserService {
                 .findFirst().get();
         return user;
     }
+
+    public User findByEmail(String email) {
+        User user = StreamSupport.stream(userRepository.findAll().spliterator(), false)
+                .filter(u -> u.getUsername() == email)
+                .findFirst().get();
+        return user;
+    }
 }

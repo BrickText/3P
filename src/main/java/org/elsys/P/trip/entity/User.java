@@ -123,4 +123,15 @@ public class User {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    @
+    private List<String> roles;
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
 }
