@@ -30,34 +30,24 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String showRegistrationForm(WebRequest request, Model model) {
-        User userDto = new User();
-        model.addAttribute("user", userDto);
+    public String showRegistrationForm(final HttpServletRequest request, final Model model) {
+        final User accountDto = new User();
+        model.addAttribute("user", accountDto);
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView registerUserAccount(
-            @ModelAttribute("user") @Valid User accountDto,
-            BindingResult result,
-            WebRequest request,
-            Errors errors) {
-
-        User registered = new User();
-        if (!result.hasErrors()) {
-            registered = createUserAccount(accountDto, result);
-        }
-        if (registered == null) {
-            result.rejectValue("email", "message.regError");
-        }
-        if (result.hasErrors()) {
-            return new ModelAndView("registration", "user", accountDto);
-        }
-        else {
-            return new ModelAndView("successRegister", "user", accountDto);
-        }
+    public void registerUserAccount(@RequestParam("username") String username, @RequestParam("password") String password,
+            @RequestParam("email") String email) {
+        User registered = new User(username, password, email);
+        System.out.println("Sad?");
+        System.out.println(registered.getUsername());
+        System.out.println(registered.getEmail());
+        System.out.println(registered.getPassword());
+        createUserAccount(registered);
     }
-    private User createUserAccount(User accountDto, BindingResult result) {
+
+    private User createUserAccount(User accountDto) {
         userService.addOrUpdateUser(accountDto);
         return accountDto;
     }
@@ -65,20 +55,5 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public Principal user(Principal principal) {
         return principal;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void login() {
-
-    }
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void register() {
-
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public void logout() {
-
     }
 }

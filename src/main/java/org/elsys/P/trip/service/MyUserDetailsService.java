@@ -1,7 +1,6 @@
 package org.elsys.P.trip.service;
 
 import org.elsys.P.trip.entity.User;
-import org.elsys.P.trip.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -20,24 +20,13 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserService userService;
-    //
-    public UserDetails loadUserByUsername(String email)
+
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        User user = userService.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException(
-                    "No user found with username: "+ email);
-        }
-        boolean enabled = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
+        User user = userService.findByUsername(username);
         return  new org.springframework.security.core.userdetails.User
-                (user.getEmail(),
-                        user.getPassword().toLowerCase(), enabled, accountNonExpired,
-                        credentialsNonExpired, accountNonLocked,
-                        getAuthorities(user.getRoles()));
+                (user.getEmail(), user.getPassword(), user.getActive(), true, true, true, getAuthorities(Arrays.asList("READ_PRIVILEGE")));
     }
 
     private static List<GrantedAuthority> getAuthorities (List<String> roles) {

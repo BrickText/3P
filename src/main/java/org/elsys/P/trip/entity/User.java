@@ -6,7 +6,9 @@ import org.elsys.P.trip.entity.views.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="user", schema = "public")
@@ -43,6 +45,10 @@ public class User {
     private String facebookAuthenticationToken;
 
     private boolean active;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     public User() {}
 
@@ -124,14 +130,12 @@ public class User {
         this.active = active;
     }
 
-    @
-    private List<String> roles;
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
     public List<String> getRoles() {
-        return roles;
+        return roles.stream().map(role -> role.toString()).collect(Collectors.toList());
     }
 }

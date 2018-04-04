@@ -72,14 +72,14 @@ public class UserService {
 
     public User findByUsername(String username) {
         User user = StreamSupport.stream(userRepository.findAll().spliterator(), false)
-                .filter(u -> u.getUsername() == username)
+                .filter(u -> u.getUsername().equals(username))
                 .findFirst().get();
         return user;
     }
 
     public User findByEmail(String email) {
         User user = StreamSupport.stream(userRepository.findAll().spliterator(), false)
-                .filter(u -> u.getUsername() == email)
+                .filter(u -> u.getEmail().equals(email))
                 .findFirst().get();
         return user;
     }
