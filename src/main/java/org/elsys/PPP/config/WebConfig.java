@@ -49,7 +49,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/index")
                 .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/index.html")
+                .defaultSuccessUrl("/index")
                 .failureUrl("/index")
                 .permitAll();
     }
