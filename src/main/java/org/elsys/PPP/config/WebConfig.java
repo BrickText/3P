@@ -41,15 +41,16 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login*","/login*", "/logout*", "/signin/**", "/signup/**", "/customLogin",
                         "/user/registration*", "/registrationConfirm*", "/expiredAccount*", "/registration*",
                         "/badUser*", "/user/resendRegistrationToken*" ,"/forgetPassword*", "/user/resetPassword*",
-                        "/user/changePassword*", "/emailError*", "/resources/**","/old/user/registration*","/successRegister*","/qrcode*","/perform_login")
+                        "/user/changePassword*", "/emailError*", "/resources/**","/old/user/registration*","/successRegister*","/qrcode*","/perform_login",
+                        "/webjars/***")
                 .permitAll()
                 .anyRequest().hasAuthority("READ_PRIVILEGE")
                 .and()
                 .formLogin()
-                .loginPage("/registration")
+                .loginPage("/index")
                 .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/homepage.html")
-                .failureUrl("/login")
+                .defaultSuccessUrl("/index.html")
+                .failureUrl("/index")
                 .permitAll();
     }
 }
