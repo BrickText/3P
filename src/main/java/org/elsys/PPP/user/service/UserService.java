@@ -1,11 +1,16 @@
 package org.elsys.PPP.user.service;
 
+import org.elsys.PPP.user.entity.Role;
 import org.elsys.PPP.user.entity.User;
+import org.elsys.PPP.user.repository.RoleRepository;
 import org.elsys.PPP.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -14,6 +19,12 @@ import java.util.stream.StreamSupport;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -80,5 +91,15 @@ public class UserService {
                 .filter(u -> u.getEmail().equals(email))
                 .findFirst().get();
         return user;
+    }
+
+    public void registerUser(String username, String firstName, String lastName,
+                             String password, String email) {
+        User user = new User(username, firstName, lastName, passwordEncoder.encode(password), email);
+        user.setActive(true);
+        List<Role> roles = new ArrayList<>();
+        roleRepository.findAll().forEach(roles::add);
+        user.setRoles(roles);
+        this.addOrUpdateUser(user);
     }
 }
