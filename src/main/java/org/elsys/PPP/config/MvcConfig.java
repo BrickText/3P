@@ -17,6 +17,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         super.addViewControllers(registry);
         registry.addViewController("/").setViewName("forward:/index");
         registry.addViewController("/index").setViewName("index");
+        registry.addViewController("/forms").setViewName("forms");
     }
 
 
