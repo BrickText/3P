@@ -1,4 +1,4 @@
-package org.elsys.PPP.user.entity.views;
+package org.elsys.PPP.views;
 
 public class View {
     public interface Summary {}
